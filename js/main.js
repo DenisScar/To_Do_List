@@ -8,6 +8,7 @@ const Main = {
     this.$checkButtons = document.querySelectorAll('.check');
     this.$inputTask = document.querySelector('#inputTask');
     this.$list = document.querySelector('#list');
+    this.$removeButtons = document.querySelectorAll('.remove');
   },
   
   bindEvents: function() {
@@ -19,6 +20,10 @@ const Main = {
     });
     
     this.$inputTask.onkeypress = self.Events.inputTask_keypress.bind(this);
+    
+    this.$removeButtons.forEach( (button) => {
+      button.onclick = self.Events.removeButton_click;
+    });
   },
   
   
@@ -35,7 +40,7 @@ const Main = {
     },
     
     //Adição de tarefa
-    inputTask_keypress: (e) => {
+    inputTask_keypress: function(e){
       const key = e.key;
       const value = e.target.value;
       
@@ -51,7 +56,21 @@ const Main = {
         `;
         
         e.target.value = '';
+        
+        this.cashSelectors();
+        this.bindEvents();
       }
+    },
+    
+    //Botão de exclusão
+    removeButton_click: (e) => {
+      const li = e.target.parentElement;
+      
+      li.classList.add('removed');
+      
+      setTimeout ( () => {
+        li.classList.add('hidden');
+      }, 300);
     }
   }
 }

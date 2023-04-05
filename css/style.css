@@ -52,6 +52,14 @@ body {
   background-color: #323b5c;
 }
 
+.wrapper-list ul.list li.hidden {
+  display: none;
+}
+
+.wrapper-list ul.list li.removed {
+  animation: collapseItem 300ms ease;
+}
+
 .wrapper-list ul.list li:hover button.remove {
   opacity: 1;
 }
@@ -124,3 +132,11 @@ body {
   color: white;
 }
 
+@keyframes collapseItem {
+  0%{
+    transform: rotateX(0deg);
+  }
+  100%{
+    transform: rotateX(-90deg);
+  }
+}
